@@ -15,7 +15,7 @@ include "views/modules/cabezote.php";
 
     <!--==== AGREGAR ARTÍCULO  ====-->
 
-    <div id="agregarClientes" style="displfay:none">
+    <div id="agregarClientes" style="display:none">
       <div class="panel panel-default">
                         <div class="panel-heading">  
         
@@ -37,27 +37,27 @@ include "views/modules/cabezote.php";
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Fecha</label>
-                                    <input type="text" class="form-control" name="fecha" id="fecha" placeholder="Cual es el dia del evento" >
+                                    <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Cual es el dia del evento" >
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>hora </label>
-                                    <input type="number" class="form-control" name="hora" id="hora" placeholder="A que hora es?" >
+                                    <input type="time" class="form-control" name="hora" id="hora" placeholder="A que hora es?" >
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-9">
+                            <div class="col-md-8">
                                 <div class="form-group">
                                     <label>Lugar</label>
                                     <input type="text" class="form-control" name="lugar" id="lugar" placeholder="Donde va a ser?">
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Imagen Banner </label>
-                                    <input type="file" class="btn btn-default" name="banner" id="banner">
+                                    <input type="file" name="imagen" class="btn btn-default" id="subirFoto" >
                                 </div>
                             </div>
                             
@@ -68,7 +68,7 @@ include "views/modules/cabezote.php";
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Descripcion </label>
-                                    <textarea  rows="5" class="form-control" name="descripcion" id="descripcion"></textarea>
+                                    <textarea  rows="5" class="form-control" name="descripcion" id="descripcion" placeholder="Cuentanos sobre el evento"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -98,9 +98,9 @@ $registroEventos -> registroEventosController();
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Telefono</th>
+                        <th>Cliente</th>
+                        <th>Nom. Evento</th>
+                        <th>Fecha</th>
                         <th>Accion</th>
                     </tr>
                 </thead>

@@ -48,7 +48,7 @@
 <script src="views/js/main.js"></script>
 <script src="views/js/gestorClientes.js"></script>
 <script src="views/js/gestorPerfiles.js"></script>
-
+<script src="views/js/gestorEventos.js"></script>
  
 
 </html>

@@ -2,50 +2,77 @@
 
 class EventosControllers{
 
-	
+	#GUARDAR EVENTOS
+	#-----------------------------------------------------------
 
-#REGISTRAR CLIENTES
-	#------------------------------------
 	public function registroEventosController(){
 
 		if(isset($_POST["cliente"])){
 
-			$datosController = array( "id_us"=>$_POST["id_us"],
+			$imagen = $_FILES["imagen"]["tmp_name"];
+
+			$borrar = glob("views/images/eventos/temp/*");
+
+			foreach($borrar as $file){
+
+				unlink($file);
+
+			}
+
+			$aleatorio = mt_rand(100, 999);
+
+			$ruta = "views/images/eventos/banner".$aleatorio.".jpg";
+
+			$origen = imagecreatefromjpeg($imagen);
+
+			$destino = imagecrop($origen, ["x"=>0, "y"=>0, "width"=>800, "height"=>400]);
+
+			imagejpeg($destino, $ruta);
+
+			$datosController = array("id_us"=>$_POST["id_us"],
 									  "cliente"=>$_POST["cliente"], 
 								      "nombre"=>$_POST["nomEvento"],
 								      "fecha"=>$_POST["fecha"],
 								      "hora"=>$_POST["hora"],
 								      "lugar"=>$_POST["lugar"],
+								      "ruta"=>$ruta,
 								      "descripcion"=>$_POST["descripcion"]);
 
 			$respuesta = Eventos::registroEventosModel($datosController, "eventos");
 
 			if($respuesta == "success"){
 
-				echo '  
-				<script>
-					
-					 swal({
-      title: "Felicidades Evento Creado!",
-      text: "Ya tienes tu evento listo. Preciona OK.",
-      type: "success"
-    },
-    function(){
-      window.location="eventos"
-    });
+				echo'<script>
 
-				</script>
+					swal({
+						  title: "¡OK!",
+						  text: "¡El artículo ha sido creado correctamente!",
+						  type: "success",
+						  confirmButtonText: "Cerrar",
+						  closeOnConfirm: false
+					},
 
-				';
-				
+					function(isConfirm){
+							 if (isConfirm) {	   
+							    window.location = "eventos";
+							  } 
+					});
+
+
+				</script>';
 
 			}
 
-			
+			else{
+
+				echo $respuesta;
+
+			}
 
 		}
 
 	}
+
 
 
 	#VISTA DE CLIENTES

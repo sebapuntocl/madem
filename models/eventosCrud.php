@@ -13,7 +13,7 @@ class Eventos extends Conexion{
 
 		#prepare() Prepara una sentencia SQL para ser ejecutada por el método PDOStatement::execute(). La sentencia SQL puede contener cero o más marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada. Ayuda a prevenir inyecciones SQL eliminando la necesidad de entrecomillar manualmente los parámetros.
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (id_us, cliente, nombre , fecha, hora, lugar, descripcion/*, banner*/) VALUES (:id_us,:cliente,:nombre,:fecha, :hora, :lugar, :descripcion/*, :banner*/ )");	
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (id_us, cliente, nombre , fecha, hora, lugar, ruta , descripcion) VALUES (:id_us,:cliente,:nombre,:fecha, :hora, :lugar, :ruta, :descripcion)");	
 
 		#bindParam() Vincula una variable de PHP a un parámetro de sustitución con nombre o de signo de interrogación correspondiente de la sentencia SQL que fue usada para preparar la sentencia.
 		$stmt->bindParam(":id_us", $datosModel["id_us"], PDO::PARAM_STR);
@@ -22,8 +22,8 @@ class Eventos extends Conexion{
 		$stmt->bindParam(":fecha", $datosModel["fecha"], PDO::PARAM_STR);
 		$stmt->bindParam(":hora", $datosModel["hora"], PDO::PARAM_STR);
 		$stmt->bindParam(":lugar", $datosModel["lugar"], PDO::PARAM_STR);
+		$stmt->bindParam(":ruta", $datosModel["ruta"], PDO::PARAM_STR);
 		$stmt->bindParam(":descripcion", $datosModel["descripcion"], PDO::PARAM_STR);
-		//$stmt->bindParam(":banner", $datosModel["banner"], PDO::PARAM_STR);
 
 		if($stmt->execute()){
 
