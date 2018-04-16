@@ -106,28 +106,40 @@ class Eventos extends Conexion{
 
 // 	#BORRAR USUARIO
 // 	#------------------------------------
-// 	public function borrarEventosModel($datosModel, $tabla){
+	public function borrarEventosModel($datosModel, $tabla){
 
-// 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_cli = :id_cli");
-// 		$stmt->bindParam(":id_cli", $datosModel, PDO::PARAM_INT);
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_even = :id_even");
+		$stmt->bindParam(":id_even", $datosModel, PDO::PARAM_INT);
 
-// 		if($stmt->execute()){
+		if($stmt->execute()){
 
-// 			return "success";
+			return "success";
 
-// 		}
+		}
 
-// 		else{
+		else{
 
-// 			return "error";
+			return "error";
 
-// 		}
+		}
 
-// 		$stmt->close();
+		$stmt->close();
 
-// 	}
+	}
 
+# IMPRIMIR PDF
+	#------------------------------------------------------------
+	public function mostrarEventosModel($tabla){
 
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+
+		$stmt -> execute();
+
+		return $stmt -> fetchAll();
+
+		$stmt -> close();
+
+	}
 
 
 }

@@ -25,7 +25,7 @@ class EventosControllers{
 
 			$origen = imagecreatefromjpeg($imagen);
 
-			$destino = imagecrop($origen, ["x"=>0, "y"=>0, "width"=>800, "height"=>400]);
+		    $destino = $origen; //imagecrop($origen, ["x"=>0, "y"=>0, "width"=>800, "height"=>400]);
 
 			imagejpeg($destino, $ruta);
 
@@ -87,11 +87,53 @@ class EventosControllers{
 				<td>'.$item["cliente"].'</td>
 				<td>'.$item["nombre"].'</td>
 				<td>'.$item["fecha"].'</td>
-				<td>
-<a href="index.php?action=clienteEditar&id='.$item["id_even"].'"><button class="btn btn-info" ><i class="fas fa-eye"></i> / <i class="fas fa-edit"></i></button></a>
-<a href="index.php?action=clientes&idBorrar='.$item["id_even"].'"><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></a></td>
+				<td>    
+				<a href="#articulo'.$item["id_even"].'"  data-toggle="modal"><button class="btn btn-success"><i class="fas fa-eye"></i></button></a>
+				<a href="index.php?action=eventosEditar&id='.$item["id_even"].'"><button class="btn btn-info" ><i class="fas fa-edit"></i></button></a>
+				<a href="index.php?action=eventos&idBorrar='.$item["id_even"].'"><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></a></td>
 				
-			</tr>';
+			</tr>
+
+
+					<div id="articulo'.$item["id_even"].'" class="modal fade">
+						<div class="modal-dialog modal-eventos modal-content">
+							<div class="modal-header" style="border:1px solid #eee">
+								
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h3 class="modal-title" style="text-align: center;"><b>'.$item["nombre"].'</b></h3>
+								
+							</div>
+							<div class="modal-body" style="border:1px solid #eee">
+								<img src="'.$item["ruta"].'" width="100%" style="margin-bottom:20px">
+								
+								<div class="row">
+									<div class="col-xs-6 col-md-6 form-group">
+										<label>Fecha</label>
+										<input class="form-control" type="text" value="'.$item["fecha"].'" />
+									</div>
+									<div class="col-xs-6 col-md-6 form-group">
+										<label>Hora</label>
+										<input class="form-control" type="text" value="'.$item["hora"].'" />
+									</div>
+									<div class="col-xs-12 col-md-12 form-group">
+										<label>Lugar</label>
+										<input class="form-control" type="text" value="'.$item["lugar"].'" />
+									</div>
+								</div>
+								<label>Descripcion</label>
+								<textarea class="form-control" rows="5">'.$item["descripcion"].'</textarea>
+							</p>
+							
+						</div>
+						<div class="modal-footer" style="border:1px solid #eee">
+							
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+							
+						</div>
+					</div>
+					</div>
+
+				';
 
 		}
 
@@ -206,50 +248,57 @@ class EventosControllers{
 		}
 	
 	}
+*/
 
 	#BORRAR CLIENTES
 	// #------------------------------------
-	public function borrarClientesController(){
+	public function borrarEventosController(){
 
 		if(isset($_GET["idBorrar"])){
 
 			$datosController = $_GET["idBorrar"];
 			
-			$respuesta = Clientes::borrarClientesModel($datosController, "clientes");
+			$respuesta = Eventos::borrarEventosModel($datosController, "eventos");
 
 			if($respuesta == "success"){
 
-				echo '
-				<script language = javascript>
+echo'<script>
 
-				swal({
-						  title: "Estas seguro de Eliminar?",
-						  text: "Si eliminas al cliente aun se mostrara la inforacion de los eventos relacionad",
-						  icon: "warning",
-						  buttons: true,
-						  dangerMode: true,
-						})
-						.then((willDelete) => {
-						  if (willDelete) {
-						    swal("Poof! Your imaginary file has been deleted!", {
-						      icon: "success",
-						    });
-						  } else {
-						    swal("Your imaginary file is safe!");
-						  }
-						});
+					swal({
+						  title: "¡OK!",
+						  text: "¡El artículo se ha borrado correctamente!",
+						  type: "success",
+						  confirmButtonText: "Cerrar",
+						  closeOnConfirm: false
+					},
+
+					function(isConfirm){
+							 if (isConfirm) {	   
+							    window.location = "eventos";
+							  } 
+					});
 
 
-
-	
-	self.location = "index.php?action=clientes"
-	</script>';
+				</script>'; 
 			
 			}
 
 		}
 
 	}
-*/
+
+		#IMPRESIÓN SUSCRIPTORES
+	#------------------------------------------------------------
+
+	public function impresionEventosController($datos){
+
+		$datosController = $datos;
+
+		$respuesta = Eventos::mostrarEventosModel($datosController);
+	
+		return $respuesta;
+
+	}
+
 
 }

@@ -79,3 +79,12 @@ margin-top: 25px;
     margin-right: 25px;
     margin-top: 15px;
 }
+
+/*solucion a problema de modal background*/
+.modal-backdrop {
+  z-index: -1;
+}
+
+.modal-eventos  {
+    width:54%;
+}

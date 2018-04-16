@@ -106,14 +106,16 @@ $registroEventos -> registroEventosController();
                 </thead>
                 <tbody>
                     <?php
-                        $vistaClientes = new EventosControllers();
-                        $vistaClientes -> vistaEventosController();
-// $vistaClientes -> borrarEventosController();
+                        $vistaEventos = new EventosControllers();
+                        $vistaEventos-> vistaEventosController();
+                        $vistaEventos-> borrarEventosController();
                     ?>
                 </tbody>
             </table>
         </div>
-        
+        <a href="tcpdf/pdf/eventos.php" target="blank">
+  <button class="btn btn-warning pull-right" style="margin:20px;">Imprimir Eventos</button>
+  </a>
     </div>
 </div>
 <!--End Advanced Tables -->
