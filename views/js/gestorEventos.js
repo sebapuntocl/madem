@@ -1,37 +1,39 @@
-/*=============================================
-Subir Imagen a través del Input         
-=============================================*/
-$("#subirFoto").change(function(){
+// /*=============================================
+// Subir Imagen a través del Input         
+// =============================================*/
+// $("#subirFoto").change(function(){
 
-	imagen = this.files[0];
+// 	imagen = this.files[0];
 
-	//Validar tamaño de la imagen
+// 	//Validar tamaño de la imagen
 
-	imagenSize = imagen.size;
+// 	imagenSize = imagen.size;
 
-	if(Number(imagenSize) > 2000000){
+// 	if(Number(imagenSize) > 2000000){
 
-		$("#arrastreImagenArticulo").before('<div class="alert alert-warning alerta text-center">El archivo excede el peso permitido, 200kb</div>')
+// 		$("#arrastreImagenArticulo").before('<div class="alert alert-warning alerta text-center">El archivo excede el peso permitido, 200kb</div>')
 
-	}
+// 	}
 
-	else{
+// 	else{
 
-		$(".alerta").remove();
+// 		$(".alerta").remove();
 
-	}
+// 	}
 
-	// Validar tipo de la imagen
+// 	// Validar tipo de la imagen
 
-	imagenType = imagen.type;
+// 	imagenType = imagen.type;
 
-	if(imagenType == "image/jpeg" || imagenType == "image/png"){
+// 	if(imagenType == "image/jpeg" || imagenType == "image/png"){
 
-		$(".alerta").remove();
-	}
+// 		$(".alerta").remove();
+// 	}
 
-	else{
+// 	else{
 
-		$("#arrastreImagenArticulo").before('<div class="alert alert-warning alerta text-center">El archivo debe ser formato JPG o PNG</div>')
+// 		$("#arrastreImagenArticulo").before('<div class="alert alert-warning alerta text-center">El archivo debe ser formato JPG o PNG</div>')
 
-	}
+// 	}
+
+// }

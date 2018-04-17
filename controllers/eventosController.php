@@ -145,97 +145,150 @@ class EventosControllers{
 #muesta lso datos en el form
 	#------------------------------------
 
-	public function editarClientesController(){
+	public function editarEventosController(){
 
 		$datosController = $_GET["id"];
-		$respuesta = Clientes::editarEventosModel($datosController, "eventos");
+		$respuesta = Eventos::editarEventosModel($datosController, "eventos");
 
 		echo'
-			<div id="agregarClientes">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						
-						<form name="ActualizaClientes"  action="" method="post">
-						
-						<input type="hidden" name="id_cli" value="'.$respuesta["id_cli"].'">
-							<div class="row">
-								<div class="col-md-3">
-									<div class="form-group">
-										<label>Nombre *</label>
-										<input type="text" class="form-control" name="nombre" id="nombre" value="'.$respuesta["nombre"].'" required >
-									</div>
-								</div>
-								<div class="col-md-5">
-									<div class="form-group">
-										<label>Email *</label>
-										<input type="email" class="form-control" name="email" id="email" value="'.$respuesta["email"].'" required>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<label>Fono Principa *</label>
-										<input type="number" class="form-control" name="fono" id="fono" value="'.$respuesta["fono"].'" required>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-3">
-									<div class="form-group">
-										<label>Fono Segundario</label>
-										<input type="number" class="form-control" name="fono2" id="fono2" value="'.$respuesta["fono2"].'">
-									</div>
-								</div>
-								<div class="col-md-9">
-									<div class="form-group">
-										<label>Direccion</label>
-										<input type="text" class="form-control" name="direccion" id="direccion" value="'.$respuesta["direccion"].'">
-									</div>
-								</div>
-								
-								
-							</div>
-							
-							<div class="row">
-								<div class="col-md-12">
-									<div class="form-group">
-										<label>Descripcion </label>
-										<textarea  rows="5" class="form-control" name="descripcion" id="descripcion">'.$respuesta["descripcion"].'</textarea>
-									</div>
-								</div>
-							</div>
-							<input type="submit" class="btn btn-info btn-fill pull-right" id="guarEvent"  value="Actualizar">
-							<div class="clearfix"></div>
-						</form>
+<div id="lagregarClientes">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			
+			<form name="ActualizaEventos"  action="" method="post" enctype="multipart/form-data">
+				<input type="hidden" value="'.$respuesta["id_even"].'" name="id_even">
+				
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Cliente *</label>
+							<input type="text" class="form-control" name="cliente" id="cliente" value="'.$respuesta["cliente"].'" required >
+						</div>
 					</div>
-					</<div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Nombre del Evento*</label>
+							<input type="text" class="form-control" name="nombre" id="nombre" value="'.$respuesta["nombre"].'" required >
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Fecha *</label>
+							<input type="date" class="form-control" name="fecha" id="fecha" value="'.$respuesta["fecha"].'" required>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Hora*</label>
+							<input type="time" class="form-control" name="hora" id="hora" value="'.$respuesta["hora"].'" required>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Lugar</label>
+							<input type="text" class="form-control" name="lugar" id="lugar" value="'.$respuesta["lugar"].'">
+						</div>
+					</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Banner del Evento</label>
+								<input type="file" class="btn btn-default" name="editarImagen" style=" margin:10px 0">
+							</div>
+						</div>
+						
+						
 						
 					</div>
+					
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Descripcion </label>
+								<textarea  rows="5" class="form-control" name="descripcion" id="descripcion">'.$respuesta["descripcion"].'</textarea>
+								<input type="hidden" value="'.$respuesta["ruta"].'" name="editarPhoto">
+							</div>
+						</div>
+					</div>
+					<input type="submit" class="btn btn-info btn-fill pull-right" id="guarEvent"  value="Actualizar">
+					<div class="clearfix"></div>
+				</form>
+			</div>
+
+			</<div>
+				
+			</div>
+			<!--<img src="'.$respuesta["ruta"].'" width="100%" style="margin-bottom:20px">-->
 ';
 
 	}
 #ACTUALIZAR CLIENTES
 #cambiar los datos del editar en la bd
 	#------------------------------------
-	public function actualizarEventosController(){
+public function actualizarEventosController(){
 
 		if(isset($_POST["nombre"])){
 
-			$datosController = array( "id_cli"=>$_POST["id_cli"],
+			if(isset($_FILES["editarImagen"]["tmp_name"])){
+
+                $imagen = $_FILES["editarImagen"]["tmp_name"];
+
+                $aleatorio = mt_rand(100, 999);
+
+                $ruta = "views/images/perfiles/perfil".$aleatorio.".jpg";
+
+                $origen = imagecreatefromjpeg($imagen);
+
+                $destino = $origen; //imagecrop($origen, ["x"=>0, "y"=>0, "width"=>800, "height"=>400]);
+
+                imagejpeg($destino, $ruta);
+
+            }
+
+            if($ruta == ""){
+
+                $ruta = $_POST["editarPhoto"];
+            }
+
+            if($ruta != "" && $_POST["editarPhoto"] != "views/images/photo.jpg"){
+
+                 unlink($_POST["editarPhoto"]);
+            
+            }
+
+
+			$datosController = array( "id_even"=>$_POST["id_even"],
+									  "cliente"=>$_POST["cliente"],
 									  "nombre"=>$_POST["nombre"],
-							          "email"=>$_POST["email"],
-				                      "fono"=>$_POST["fono"],
-				                      "fono2"=>$_POST["fono2"],
-				                      "direccion"=>$_POST["direccion"],
+				                      "fecha"=>$_POST["fecha"],
+							          "hora"=>$_POST["hora"],
+				                      "lugar"=>$_POST["lugar"],
+				                      "ruta"=>$ruta,
 				                      "descripcion"=>$_POST["descripcion"]);
 			
-			$respuesta = Clientes::actualizarClientesModel($datosController, "clientes");
+			$respuesta = Eventos::actualizarEventosModel($datosController, "eventos");
 
 			if($respuesta == "success"){
 
-				echo '<script language = javascript>
-	alert("Cambio Correcta.")
-	self.location = "index.php?action=clientes"
-	</script>';
+				echo '<script>
+
+                        swal({
+                              title: "¡OK!",
+                              text: "¡El usuario ha sido editado correctamente!",
+                              type: "success",
+                              confirmButtonText: "Cerrar",
+                              closeOnConfirm: false
+                        },
+
+                        function(isConfirm){
+                                 if (isConfirm) {      
+                                    window.location = "eventos";
+                                  } 
+                        });
+
+
+                    </script>';
 
 			}
 
@@ -250,7 +303,7 @@ class EventosControllers{
 	}
 
 
-	#BORRAR CLIENTES
+	#BORRAR EVENTOS
 	// #------------------------------------
 	public function borrarEventosController(){
 

@@ -70,10 +70,10 @@ class ClientesControllers{
 #muesta lso datos en el form
 	#------------------------------------
 
-	public function editarClientesController(){
+	public function editarEventosController(){
 
 		$datosController = $_GET["id"];
-		$respuesta = Clientes::editarClientesModel($datosController, "clientes");
+		$respuesta = Clientes::editarEventosModel($datosController, "clientes");
 
 		echo'
 			<div id="agregarClientes">
@@ -145,6 +145,7 @@ class ClientesControllers{
 
 		if(isset($_POST["nombre"])){
 
+				                      
 			$datosController = array( "id_cli"=>$_POST["id_cli"],
 									  "nombre"=>$_POST["nombre"],
 							          "email"=>$_POST["email"],

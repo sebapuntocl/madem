@@ -62,7 +62,7 @@ class Eventos extends Conexion{
 
 	public function editarEventosModel($datosModel, $tabla){
 
-		$stmt = Conexion::conectar()->prepare("SELECT id_even, nombre, email, fono, fono2, direccion, descripcion FROM $tabla WHERE id_even = :id_even");
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE id_even = :id_even");
 		$stmt->bindParam(":id_even", $datosModel, PDO::PARAM_INT);	
 		$stmt->execute();
 
@@ -72,19 +72,20 @@ class Eventos extends Conexion{
 
 	}
 
-#ACTUALIZAR USUARIO
+#ACTUALIZAREVENTO
 	#-------------------------------------
 
 	public function actualizarEventosModel($datosModel, $tabla){
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, email = :email, fono = :fono, fono2 = :fono2, direccion = :direccion, descripcion = :descripcion WHERE id_even = :id_even");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET cliente = :cliente, nombre = :nombre, fecha = :fecha, hora = :hora, lugar = :lugar, descripcion = :descripcion, ruta = :ruta  WHERE id_even = :id_even");
 
+		$stmt->bindParam(":cliente", $datosModel["cliente"], PDO::PARAM_STR);
 		$stmt->bindParam(":nombre", $datosModel["nombre"], PDO::PARAM_STR);
-		$stmt->bindParam(":email", $datosModel["email"], PDO::PARAM_STR);
-		$stmt->bindParam(":fono", $datosModel["fono"], PDO::PARAM_STR);
-		$stmt->bindParam(":fono2", $datosModel["fono2"], PDO::PARAM_STR);
-		$stmt->bindParam(":direccion", $datosModel["direccion"], PDO::PARAM_STR);
+		$stmt->bindParam(":fecha", $datosModel["fecha"], PDO::PARAM_STR);
+		$stmt->bindParam(":hora", $datosModel["hora"], PDO::PARAM_STR);
+		$stmt->bindParam(":lugar", $datosModel["lugar"], PDO::PARAM_STR);
 		$stmt->bindParam(":descripcion", $datosModel["descripcion"], PDO::PARAM_STR);
+		$stmt->bindParam(":ruta", $datosModel["ruta"], PDO::PARAM_STR);
 		$stmt->bindParam(":id_even", $datosModel["id_even"], PDO::PARAM_INT);
 
 		if($stmt->execute()){
@@ -102,6 +103,7 @@ class Eventos extends Conexion{
 		$stmt->close();
 
 	}
+
 
 
 // 	#BORRAR USUARIO

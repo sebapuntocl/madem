@@ -12,13 +12,12 @@ include "views/modules/cabezote.php";
 <h1> Editar Eventos</h1>
 <hr>
 
-<form method="post" action="">
+
 	
 <?php 
 	 $editarEventos = new EventosControllers();
-	 $editarEventos -> editarClientesController();
-	 $editarEventos -> actualizarClientesController();//si hay algun error al editar muesta el error
+	 $editarEventos -> editarEventosController();
+	 $editarEventos -> actualizarEventosController();//si hay algun error al editar muesta el error
  ?>
 	
 
-</form>
