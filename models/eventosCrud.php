@@ -57,51 +57,51 @@ class Eventos extends Conexion{
 	}	
 
 
-// 	#EDITAR USUARIO
-// 	#-------------------------------------
+	#EDITAR USUARIO
+	#-------------------------------------
 
-// 	public function editarEventosModel($datosModel, $tabla){
+	public function editarEventosModel($datosModel, $tabla){
 
-// 		$stmt = Conexion::conectar()->prepare("SELECT id_cli, nombre, email, fono, fono2, direccion, descripcion FROM $tabla WHERE id_cli = :id_cli");
-// 		$stmt->bindParam(":id_cli", $datosModel, PDO::PARAM_INT);	
-// 		$stmt->execute();
+		$stmt = Conexion::conectar()->prepare("SELECT id_even, nombre, email, fono, fono2, direccion, descripcion FROM $tabla WHERE id_even = :id_even");
+		$stmt->bindParam(":id_even", $datosModel, PDO::PARAM_INT);	
+		$stmt->execute();
 
-// 		return $stmt->fetch();
+		return $stmt->fetch();
 
-// 		$stmt->close();
+		$stmt->close();
 
-// 	}
+	}
 
-// #ACTUALIZAR USUARIO
-// 	#-------------------------------------
+#ACTUALIZAR USUARIO
+	#-------------------------------------
 
-// 	public function actualizarEventosModel($datosModel, $tabla){
+	public function actualizarEventosModel($datosModel, $tabla){
 
-// 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, email = :email, fono = :fono, fono2 = :fono2, direccion = :direccion, descripcion = :descripcion WHERE id_cli = :id_cli");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, email = :email, fono = :fono, fono2 = :fono2, direccion = :direccion, descripcion = :descripcion WHERE id_even = :id_even");
 
-// 		$stmt->bindParam(":nombre", $datosModel["nombre"], PDO::PARAM_STR);
-// 		$stmt->bindParam(":email", $datosModel["email"], PDO::PARAM_STR);
-// 		$stmt->bindParam(":fono", $datosModel["fono"], PDO::PARAM_STR);
-// 		$stmt->bindParam(":fono2", $datosModel["fono2"], PDO::PARAM_STR);
-// 		$stmt->bindParam(":direccion", $datosModel["direccion"], PDO::PARAM_STR);
-// 		$stmt->bindParam(":descripcion", $datosModel["descripcion"], PDO::PARAM_STR);
-// 		$stmt->bindParam(":id_cli", $datosModel["id_cli"], PDO::PARAM_INT);
+		$stmt->bindParam(":nombre", $datosModel["nombre"], PDO::PARAM_STR);
+		$stmt->bindParam(":email", $datosModel["email"], PDO::PARAM_STR);
+		$stmt->bindParam(":fono", $datosModel["fono"], PDO::PARAM_STR);
+		$stmt->bindParam(":fono2", $datosModel["fono2"], PDO::PARAM_STR);
+		$stmt->bindParam(":direccion", $datosModel["direccion"], PDO::PARAM_STR);
+		$stmt->bindParam(":descripcion", $datosModel["descripcion"], PDO::PARAM_STR);
+		$stmt->bindParam(":id_even", $datosModel["id_even"], PDO::PARAM_INT);
 
-// 		if($stmt->execute()){
+		if($stmt->execute()){
 
-// 			return "success";
+			return "success";
 
-// 		}
+		}
 
-// 		else{
+		else{
 
-// 			return "error";
+			return "error";
 
-// 		}
+		}
 
-// 		$stmt->close();
+		$stmt->close();
 
-// 	}
+	}
 
 
 // 	#BORRAR USUARIO
@@ -127,19 +127,7 @@ class Eventos extends Conexion{
 
 	}
 
-# IMPRIMIR PDF
-	#------------------------------------------------------------
-	public function mostrarEventosModel($tabla){
 
-		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
-
-		$stmt -> execute();
-
-		return $stmt -> fetchAll();
-
-		$stmt -> close();
-
-	}
 
 
 }

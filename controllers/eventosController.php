@@ -140,7 +140,7 @@ class EventosControllers{
 	}
 
            
-/*
+
 #EDITAR CLIENTES
 #muesta lso datos en el form
 	#------------------------------------
@@ -148,7 +148,7 @@ class EventosControllers{
 	public function editarClientesController(){
 
 		$datosController = $_GET["id"];
-		$respuesta = Clientes::editarClientesModel($datosController, "clientes");
+		$respuesta = Clientes::editarEventosModel($datosController, "eventos");
 
 		echo'
 			<div id="agregarClientes">
@@ -216,7 +216,7 @@ class EventosControllers{
 #ACTUALIZAR CLIENTES
 #cambiar los datos del editar en la bd
 	#------------------------------------
-	public function actualizarClientesController(){
+	public function actualizarEventosController(){
 
 		if(isset($_POST["nombre"])){
 
@@ -248,7 +248,7 @@ class EventosControllers{
 		}
 	
 	}
-*/
+
 
 	#BORRAR CLIENTES
 	// #------------------------------------
@@ -294,7 +294,7 @@ echo'<script>
 
 		$datosController = $datos;
 
-		$respuesta = Eventos::mostrarEventosModel($datosController);
+		$respuesta = Eventos::vistaEventosModel($datosController);
 	
 		return $respuesta;
 

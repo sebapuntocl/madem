@@ -8,6 +8,7 @@ class EnlacesModels{
 		   $enlaces == "dashboard" || 
 		   $enlaces == "clientes" || 
 		   $enlaces == "clienteEditar" || 
+		   $enlaces == "eventosEditar" ||
 		   $enlaces == "registro" || 
 		   $enlaces == "perfil" || 
 		   $enlaces == "eventos" ||
